@@ -27,6 +27,9 @@ jobs:
                   extensions: dom, curl, libxml, mbstring, zip
                   coverage: pcov
 
+            -  name: Add HTTP basic auth credentials
+               run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
             - name: Install dependencies
               run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 

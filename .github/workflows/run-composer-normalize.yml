@@ -12,6 +12,9 @@ jobs:
             - name: Git checkout
               uses: actions/checkout@v2
 
+            -  name: Add HTTP basic auth credentials
+               run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
             - name: Validate Composer configuration
               run: composer validate --strict
 

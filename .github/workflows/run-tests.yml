@@ -18,6 +18,9 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
+            -  name: Add HTTP basic auth credentials
+               run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
             - name: Cache dependencies
               uses: actions/cache@v2
               with:
