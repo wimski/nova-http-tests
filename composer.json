@@ -30,12 +30,6 @@
         "phpunit/phpunit": "^9.5",
         "thecodingmachine/phpstan-safe-rule": "^1.0"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        }
-    ],
     "config": {
         "sort-packages": true
     },
@@ -49,6 +43,12 @@
             "Wimski\\NovaHttpTests\\Tests\\": "tests"
         }
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "scripts": {
         "analyze": "@php vendor/phpstan/phpstan/phpstan analyse --memory-limit 1G",
         "check-style": [
