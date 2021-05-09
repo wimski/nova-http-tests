@@ -85,4 +85,17 @@ trait MakesNovaHttpRequests
     {
         return 'nova-api';
     }
+
+    /**
+     * @param array<string, mixed>[] $filters
+     * @return string
+     */
+    protected function formatNovaResourceFiltersQueryString(array $filters): string
+    {
+        if (empty($filters)) {
+            return '';
+        }
+
+        return 'filters=' . base64_encode(json_encode($filters));
+    }
 }

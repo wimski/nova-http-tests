@@ -31,7 +31,7 @@ trait MakesNovaResourceRequests
             $filters = $this->getNovaResourceDefaultFilters();
         }
 
-        return $this->get("?{$this->getNovaResourceFiltersQueryString($filters)}");
+        return $this->get("?{$this->formatNovaResourceFiltersQueryString($filters)}");
     }
 
     protected function getNovaResourceFilters(): NovaResponse
@@ -73,18 +73,5 @@ trait MakesNovaResourceRequests
                 'value' => $filter['currentValue'],
             ];
         }, $response->json());
-    }
-
-    /**
-     * @param array<string, mixed>[] $filters
-     * @return string
-     */
-    protected function getNovaResourceFiltersQueryString(array $filters): string
-    {
-        if (empty($filters)) {
-            return '';
-        }
-
-        return 'filters=' . base64_encode(json_encode($filters));
     }
 }
