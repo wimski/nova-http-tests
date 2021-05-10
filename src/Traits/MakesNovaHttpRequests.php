@@ -10,12 +10,7 @@ use Wimski\NovaHttpTests\NovaResponse;
 
 trait MakesNovaHttpRequests
 {
-    use MakesHttpRequests {
-        get as originalGet;
-        post as originalPost;
-        put as originalPut;
-        delete as originalDelete;
-    }
+    use MakesHttpRequests;
 
     /**
      * @param string               $uri
