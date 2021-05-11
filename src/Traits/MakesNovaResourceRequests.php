@@ -15,7 +15,7 @@ trait MakesNovaResourceRequests
     abstract protected static function getNovaResourceClass(): string;
 
     /**
-     * @param array<string, mixed> $filters
+     * @param array<string, mixed>[] $filters
      * @return NovaResponse
      */
     public function getNovaResources(array $filters = []): NovaResponse
@@ -70,7 +70,13 @@ trait MakesNovaResourceRequests
 
     protected static function getNovaUriPrefix(): string
     {
-        $uriKey = call_user_func([static::getNovaResourceClass(), 'uriKey']);
+        $uriKey = '';
+
+        $resourceClass = static::getNovaResourceClass();
+
+        if (method_exists($resourceClass, 'uriKey')) {
+            $uriKey = $resourceClass::uriKey();
+        }
 
         return static::originalGetNovaUriPrefix() . '/' . $uriKey;
     }

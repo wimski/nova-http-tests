@@ -7,6 +7,7 @@ namespace Wimski\NovaHttpTests\Traits;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
 use Illuminate\Http\Response;
 use Wimski\NovaHttpTests\NovaResponse;
+use function Safe\json_encode;
 
 trait MakesNovaRequests
 {
@@ -91,6 +92,9 @@ trait MakesNovaRequests
             return '';
         }
 
-        return 'filters=' . base64_encode(json_encode($filters));
+        /** @var string $data */
+        $data = json_encode($filters);
+
+        return 'filters=' . base64_encode($data);
     }
 }
