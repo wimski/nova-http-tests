@@ -10,32 +10,32 @@ trait MakesNovaGeneralRequests
 {
     use MakesNovaRequests;
 
-    protected function getNovaSearch(string $query): NovaResponse
+    public function getNovaSearch(string $query): NovaResponse
     {
         return $this->getNova("/search?search={$query}");
     }
 
-    protected function getNovaDashboard(string $dashboard): NovaResponse
+    public function getNovaDashboard(string $dashboard): NovaResponse
     {
         return $this->getNova("/dashboards/{$dashboard}");
     }
 
-    protected function getNovaDashboardCards(string $dashboard): NovaResponse
+    public function getNovaDashboardCards(string $dashboard): NovaResponse
     {
         return $this->getNova("/dashboards/cards/{$dashboard}");
     }
 
-    protected function getNovaMetrics(): NovaResponse
+    public function getNovaMetrics(): NovaResponse
     {
         return $this->getNova('/metrics');
     }
 
-    protected function getNovaMetric(string $metric): NovaResponse
+    public function getNovaMetric(string $metric): NovaResponse
     {
         return $this->getNova("/metrics/{$metric}");
     }
 
-    protected function getNovaCards(): NovaResponse
+    public function getNovaCards(): NovaResponse
     {
         return $this->getNova('/cards');
     }

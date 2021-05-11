@@ -18,7 +18,7 @@ trait MakesNovaResourceRequests
      * @param array<string, mixed> $filters
      * @return NovaResponse
      */
-    protected function getNovaResources(array $filters = []): NovaResponse
+    public function getNovaResources(array $filters = []): NovaResponse
     {
         if (empty($filters)) {
             $filters = $this->getNovaResourceDefaultFilters();
@@ -27,7 +27,7 @@ trait MakesNovaResourceRequests
         return $this->getNova("?{$this->formatNovaResourceFiltersQueryString($filters)}");
     }
 
-    protected function getNovaResourceFilters(): NovaResponse
+    public function getNovaResourceFilters(): NovaResponse
     {
         return $this->getNova('/filters');
     }
@@ -35,12 +35,12 @@ trait MakesNovaResourceRequests
     /**
      * @param int|string $key
      */
-    protected function getNovaResource($key): NovaResponse
+    public function getNovaResource($key): NovaResponse
     {
         return $this->getNova("/{$key}");
     }
 
-    protected function getNovaResourceCreationFields(): NovaResponse
+    public function getNovaResourceCreationFields(): NovaResponse
     {
         return $this->getNova('/creation-fields');
     }
@@ -48,7 +48,7 @@ trait MakesNovaResourceRequests
     /**
      * @param int|string $key
      */
-    protected function getNovaResourceUpdateFields($key): NovaResponse
+    public function getNovaResourceUpdateFields($key): NovaResponse
     {
         return $this->getNova("/{$key}/update-fields");
     }

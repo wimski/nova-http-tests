@@ -17,7 +17,7 @@ trait MakesNovaRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    protected function getNova(string $uri, array $headers = []): NovaResponse
+    public function getNova(string $uri, array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
         $response = $this->getJson(static::getNovaUriPrefix() . $uri, $headers);
@@ -31,7 +31,7 @@ trait MakesNovaRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    protected function postNova(string $uri, array $data = [], array $headers = []): NovaResponse
+    public function postNova(string $uri, array $data = [], array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
         $response = $this->postJson(static::getNovaUriPrefix() . $uri, $data, $headers);
@@ -45,7 +45,7 @@ trait MakesNovaRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    protected function putNova(string $uri, array $data = [], array $headers = []): NovaResponse
+    public function putNova(string $uri, array $data = [], array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
         $response = $this->putJson(static::getNovaUriPrefix() . $uri, $data, $headers);
@@ -59,7 +59,7 @@ trait MakesNovaRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    protected function deleteNova(string $uri, array $data = [], array $headers = []): NovaResponse
+    public function deleteNova(string $uri, array $data = [], array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
         $response = $this->deleteJson(static::getNovaUriPrefix() . $uri, $data, $headers);
