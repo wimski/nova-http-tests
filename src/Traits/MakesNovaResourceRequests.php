@@ -8,18 +8,11 @@ use Wimski\NovaHttpTests\NovaResponse;
 
 trait MakesNovaResourceRequests
 {
-    use MakesNovaHttpRequests {
+    use MakesNovaRequests {
         getNovaUriPrefix as originalGetNovaUriPrefix;
     }
 
     abstract protected static function getNovaResourceClass(): string;
-
-    protected static function getNovaUriPrefix(): string
-    {
-        $uriKey = call_user_func([static::getNovaResourceClass(), 'uriKey']);
-
-        return static::originalGetNovaUriPrefix() . '/' . $uriKey;
-    }
 
     /**
      * @param array<string, mixed> $filters
@@ -31,12 +24,12 @@ trait MakesNovaResourceRequests
             $filters = $this->getNovaResourceDefaultFilters();
         }
 
-        return $this->get("?{$this->formatNovaResourceFiltersQueryString($filters)}");
+        return $this->getNova("?{$this->formatNovaResourceFiltersQueryString($filters)}");
     }
 
     protected function getNovaResourceFilters(): NovaResponse
     {
-        return $this->get('/filters');
+        return $this->getNova('/filters');
     }
 
     /**
@@ -44,12 +37,12 @@ trait MakesNovaResourceRequests
      */
     protected function getNovaResource($key): NovaResponse
     {
-        return $this->get("/{$key}");
+        return $this->getNova("/{$key}");
     }
 
     protected function getNovaResourceCreationFields(): NovaResponse
     {
-        return $this->get('/creation-fields');
+        return $this->getNova('/creation-fields');
     }
 
     /**
@@ -57,7 +50,7 @@ trait MakesNovaResourceRequests
      */
     protected function getNovaResourceUpdateFields($key): NovaResponse
     {
-        return $this->get("/{$key}/update-fields");
+        return $this->getNova("/{$key}/update-fields");
     }
 
     /**
@@ -73,5 +66,12 @@ trait MakesNovaResourceRequests
                 'value' => $filter['currentValue'],
             ];
         }, $response->json());
+    }
+
+    protected static function getNovaUriPrefix(): string
+    {
+        $uriKey = call_user_func([static::getNovaResourceClass(), 'uriKey']);
+
+        return static::originalGetNovaUriPrefix() . '/' . $uriKey;
     }
 }

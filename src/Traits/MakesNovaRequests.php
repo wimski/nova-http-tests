@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
 use Illuminate\Http\Response;
 use Wimski\NovaHttpTests\NovaResponse;
 
-trait MakesNovaHttpRequests
+trait MakesNovaRequests
 {
     use MakesHttpRequests;
 
@@ -17,10 +17,10 @@ trait MakesNovaHttpRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    public function get($uri, array $headers = []): NovaResponse
+    protected function getNova(string $uri, array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
-        $response = $this->json('GET', static::getNovaUriPrefix() . $uri, [], $headers);
+        $response = $this->getJson(static::getNovaUriPrefix() . $uri, $headers);
 
         return $response;
     }
@@ -31,10 +31,10 @@ trait MakesNovaHttpRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    public function post($uri, array $data = [], array $headers = []): NovaResponse
+    protected function postNova(string $uri, array $data = [], array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
-        $response = $this->json('POST', static::getNovaUriPrefix() . $uri, $data, $headers);
+        $response = $this->postJson(static::getNovaUriPrefix() . $uri, $data, $headers);
 
         return $response;
     }
@@ -45,10 +45,10 @@ trait MakesNovaHttpRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    public function put($uri, array $data = [], array $headers = []): NovaResponse
+    protected function putNova(string $uri, array $data = [], array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
-        $response = $this->json('PUT', static::getNovaUriPrefix() . $uri, $data, $headers);
+        $response = $this->putJson(static::getNovaUriPrefix() . $uri, $data, $headers);
 
         return $response;
     }
@@ -59,10 +59,10 @@ trait MakesNovaHttpRequests
      * @param array<string, mixed> $headers
      * @return NovaResponse
      */
-    public function delete($uri, array $data = [], array $headers = []): NovaResponse
+    protected function deleteNova(string $uri, array $data = [], array $headers = []): NovaResponse
     {
         /** @var NovaResponse $response */
-        $response = $this->json('DELETE', static::getNovaUriPrefix() . $uri, $data, $headers);
+        $response = $this->deleteJson(static::getNovaUriPrefix() . $uri, $data, $headers);
 
         return $response;
     }

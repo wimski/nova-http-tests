@@ -8,35 +8,35 @@ use Wimski\NovaHttpTests\NovaResponse;
 
 trait MakesNovaGeneralRequests
 {
-    use MakesNovaHttpRequests;
+    use MakesNovaRequests;
 
     protected function getNovaSearch(string $query): NovaResponse
     {
-        return $this->get("/search?search={$query}");
+        return $this->getNova("/search?search={$query}");
     }
 
     protected function getNovaDashboard(string $dashboard): NovaResponse
     {
-        return $this->get("/dashboards/{$dashboard}");
+        return $this->getNova("/dashboards/{$dashboard}");
     }
 
     protected function getNovaDashboardCards(string $dashboard): NovaResponse
     {
-        return $this->get("/dashboards/cards/{$dashboard}");
+        return $this->getNova("/dashboards/cards/{$dashboard}");
     }
 
     protected function getNovaMetrics(): NovaResponse
     {
-        return $this->get('/metrics');
+        return $this->getNova('/metrics');
     }
 
     protected function getNovaMetric(string $metric): NovaResponse
     {
-        return $this->get("/metrics/{$metric}");
+        return $this->getNova("/metrics/{$metric}");
     }
 
     protected function getNovaCards(): NovaResponse
     {
-        return $this->get('/cards');
+        return $this->getNova('/cards');
     }
 }
