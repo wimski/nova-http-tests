@@ -11,7 +11,7 @@ use Wimski\NovaHttpTests\NovaResponse;
 
 class NovaResponseTest extends AbstractUnitTest
 {
-    protected NovaResponse $test;
+    protected NovaResponse $novaResponse;
 
     /** @var Response|MockInterface  */
     protected $response;
@@ -20,8 +20,8 @@ class NovaResponseTest extends AbstractUnitTest
     {
         parent::setUp();
 
-        $this->response = Mockery::mock(Response::class);
-        $this->test     = new NovaResponse($this->response);
+        $this->response     = Mockery::mock(Response::class);
+        $this->novaResponse = new NovaResponse($this->response);
     }
 
     /**
@@ -40,7 +40,7 @@ class NovaResponseTest extends AbstractUnitTest
             ')
             ->getMock();
 
-        $this->test->assertResourceCount(1);
+        $this->novaResponse->assertResourceCount(1);
     }
 
     /**
@@ -68,6 +68,6 @@ class NovaResponseTest extends AbstractUnitTest
             ')
             ->getMock();
 
-        $this->test->assertResourceIds(123, 456);
+        $this->novaResponse->assertResourceIds(123, 456);
     }
 }

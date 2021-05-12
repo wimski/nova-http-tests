@@ -18,13 +18,13 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
     /**
      * @var UsesMakesNovaResourceRequests|MockInterface
      */
-    protected $test;
+    protected $trait;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->test = $this->mockPartial(UsesMakesNovaResourceRequests::class, [
+        $this->trait = $this->mockPartial(UsesMakesNovaResourceRequests::class, [
             'getNova',
             'postNova',
             'putNova',
@@ -44,12 +44,12 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
             ],
         ]));
 
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('?filters=' . $filters)
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaResources([
+        $this->trait->getNovaResources([
             [
                 'class' => 'SomeClass',
                 'value' => 'some-value',
@@ -80,17 +80,17 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
             ])
             ->getMock();
 
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/filters')
             ->andReturn($response);
 
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('?filters=' . $filters)
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaResources();
+        $this->trait->getNovaResources();
     }
 
     /**
@@ -98,12 +98,12 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
      */
     public function it_gets_resource_filters(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/filters')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaResourceFilters();
+        $this->trait->getNovaResourceFilters();
     }
 
     /**
@@ -111,12 +111,12 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
      */
     public function it_gets_a_resource(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/key')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaResource('key');
+        $this->trait->getNovaResource('key');
     }
 
     /**
@@ -124,12 +124,12 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
      */
     public function it_gets_resource_creation_fields(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/creation-fields')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaResourceCreationFields();
+        $this->trait->getNovaResourceCreationFields();
     }
 
     /**
@@ -137,11 +137,11 @@ class MakesNovaResourceRequestsTest extends AbstractTraitTest
      */
     public function it_gets_resource_update_fields(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/key/update-fields')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaResourceUpdateFields('key');
+        $this->trait->getNovaResourceUpdateFields('key');
     }
 }

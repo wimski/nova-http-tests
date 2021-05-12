@@ -17,13 +17,13 @@ class MakesNovaRequestsTest extends AbstractTraitTest
     /**
      * @var UsesMakesNovaRequests|MockInterface
      */
-    protected $test;
+    protected $trait;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->test = $this->mockPartial(UsesMakesNovaRequests::class, [
+        $this->trait = $this->mockPartial(UsesMakesNovaRequests::class, [
             'getJson',
             'postJson',
             'putJson',
@@ -36,12 +36,12 @@ class MakesNovaRequestsTest extends AbstractTraitTest
      */
     public function it_makes_a_get_request(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getJson')
             ->with('nova-api/foo', ['key' => 'value'])
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNova('/foo', ['key' => 'value']);
+        $this->trait->getNova('/foo', ['key' => 'value']);
     }
 
     /**
@@ -49,12 +49,12 @@ class MakesNovaRequestsTest extends AbstractTraitTest
      */
     public function it_makes_a_post_request(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('postJson')
             ->with('nova-api/foo', ['data' => 'item'], ['key' => 'value'])
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->postNova('/foo', ['data' => 'item'], ['key' => 'value']);
+        $this->trait->postNova('/foo', ['data' => 'item'], ['key' => 'value']);
     }
 
     /**
@@ -62,12 +62,12 @@ class MakesNovaRequestsTest extends AbstractTraitTest
      */
     public function it_makes_a_put_request(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('putJson')
             ->with('nova-api/foo', ['data' => 'item'], ['key' => 'value'])
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->putNova('/foo', ['data' => 'item'], ['key' => 'value']);
+        $this->trait->putNova('/foo', ['data' => 'item'], ['key' => 'value']);
     }
 
     /**
@@ -75,11 +75,11 @@ class MakesNovaRequestsTest extends AbstractTraitTest
      */
     public function it_makes_a_delete_request(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('deleteJson')
             ->with('nova-api/foo', ['data' => 'item'], ['key' => 'value'])
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->deleteNova('/foo', ['data' => 'item'], ['key' => 'value']);
+        $this->trait->deleteNova('/foo', ['data' => 'item'], ['key' => 'value']);
     }
 }

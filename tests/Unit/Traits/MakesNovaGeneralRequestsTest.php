@@ -17,13 +17,13 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
     /**
      * @var UsesMakesNovaGeneralRequests|MockInterface
      */
-    protected $test;
+    protected $trait;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->test = $this->mockPartial(UsesMakesNovaGeneralRequests::class, ['getNova']);
+        $this->trait = $this->mockPartial(UsesMakesNovaGeneralRequests::class, ['getNova']);
     }
 
     /**
@@ -31,12 +31,12 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
      */
     public function it_gets_search(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/search?search=foo')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaSearch('foo');
+        $this->trait->getNovaSearch('foo');
     }
 
     /**
@@ -44,12 +44,12 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
      */
     public function it_gets_a_dashboard(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/dashboards/foo')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaDashboard('foo');
+        $this->trait->getNovaDashboard('foo');
     }
 
     /**
@@ -57,12 +57,12 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
      */
     public function it_gets_dashboard_cards(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/dashboards/cards/foo')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaDashboardCards('foo');
+        $this->trait->getNovaDashboardCards('foo');
     }
 
     /**
@@ -70,12 +70,12 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
      */
     public function it_gets_metrics(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/metrics')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaMetrics();
+        $this->trait->getNovaMetrics();
     }
 
     /**
@@ -83,12 +83,12 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
      */
     public function it_gets_a_metric(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/metrics/foo')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaMetric('foo');
+        $this->trait->getNovaMetric('foo');
     }
 
     /**
@@ -96,11 +96,11 @@ class MakesNovaGeneralRequestsTest extends AbstractTraitTest
      */
     public function it_gets_cards(): void
     {
-        $this->test
+        $this->trait
             ->shouldReceive('getNova')
             ->with('/cards')
             ->andReturn(Mockery::mock(NovaResponse::class));
 
-        $this->test->getNovaCards();
+        $this->trait->getNovaCards();
     }
 }
