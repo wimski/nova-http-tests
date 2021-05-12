@@ -92,9 +92,6 @@ trait MakesNovaRequests
             return '';
         }
 
-        /** @var string $data */
-        $data = json_encode($filters);
-
-        return 'filters=' . base64_encode($data);
+        return 'filters=' . base64_encode(json_encode($filters));
     }
 }
